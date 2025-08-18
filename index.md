@@ -67,11 +67,11 @@ ext-js:
 	  <div class="section-title">Os nossos valores</div>
     <div id="values-text">
 
-Saúde Prevenir a doença através de boas práticas, desporto, alimentação e vida ativa <br>
-Humor O riso é a maior inspiração e mostra que somos todos iguais <br>
-Integridade Respeito pelos direitos humanos e ciência baseada na evidência <br>
-Pensamento crítico Ferramentas de empoderamento para melhorar a sociedade através do conhecimento <br>
-Encantamento Manter a curiosidade de criança para descobrir a magia do dia-a-dia <br>
+        Saúde Prevenir a doença através de boas práticas, desporto, alimentação e vida ativa <br>
+        Humor O riso é a maior inspiração e mostra que somos todos iguais <br>
+        Integridade Respeito pelos direitos humanos e ciência baseada na evidência <br>
+        Pensamento crítico Ferramentas de empoderamento para melhorar a sociedade através do conhecimento <br>
+        Encantamento Manter a curiosidade de criança para descobrir a magia do dia-a-dia <br>
 
 
     </div>

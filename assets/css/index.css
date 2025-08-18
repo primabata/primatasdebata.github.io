@@ -155,7 +155,7 @@ footer {
 }
 
 #aboutme-section {
-  color: #FFFFFF;
+  /*color: #FFFFFF;*/
   text-align: left;
   max-width: 56.875rem;
   margin: 0 auto;
@@ -178,7 +178,7 @@ footer {
   top: 0.3125rem;
 }
 .about-text .about-content {
-  color: #FFFFFF;
+  /*color: #FFFFFF;*/
   padding-left: 1.875rem;
   display: inline-block;
 }
@@ -272,7 +272,7 @@ footer {
 #aboutus-out, .aboutus-buffer {
   background: #f5f5f5;
   /*background: #0a1236;*/
-  /*color: #FFFFFF;*/
+  color: #333;
   /*background-image: url(/assets/img/back-bg.png);*/
 }
 #aboutus, 
@@ -280,14 +280,19 @@ footer {
   padding: 0 1rem;
 }
 
-#aboutus-subheader,
 #values-text {
   max-width: 1200px;
   margin: 0 auto;
   font-size: 9.5rem
 }
 
-#aboutus-text,
+#aboutus-text {
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1.5rem
+}
+
 #values-text {
   max-width: 1200px;
   margin: 0 auto;
@@ -298,7 +303,6 @@ footer {
   #aboutus-text,
   #values-text {
     font-size: 1.25rem;
-    color: #fff;
   }
 }
 

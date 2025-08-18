@@ -1,1 +1,1 @@
-Website for [Prima tás de bata](https://primatasdebata.pt/) - R/Shiny Consultant
+Website for [Prima tás de bata](https://primatasdebata.pt/) 
