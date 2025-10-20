@@ -20,11 +20,7 @@ ext-js:
 ## Ciência para todos! {#subtitle}
 
 #### A cientista lá do bairro na luta contra a desinformação científica em Portugal.
-
-<div class="social-proof">
-  <span class="community-size">4000+</span>
-  <span class="community-label">pessoas curiosas na nossa comunidade</span>
-</div>
+#### Uma comunidade de 4000+ pessoas curiosas e informadas
 
 <div class="cta-buttons">
   <a href="https://instagram.com/primatasdebata" class="actionbtn actionbtn-primary" target="_blank" rel="noopener">
