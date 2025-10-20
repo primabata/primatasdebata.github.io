@@ -5,10 +5,6 @@ css:
   - /assets/css/index.css
 ext-css:
   - //fonts.googleapis.com/css?family=Roboto:400,700
-js:
-  - /assets/js/index.js
-ext-js:
-  - //cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js
 ---
 
 <div id="header" markdown="1">
@@ -35,8 +31,6 @@ ext-js:
 {: .cta-group :}
 
 </div>
-
-<div id="particles-js"></div>
 
 </div>
 
