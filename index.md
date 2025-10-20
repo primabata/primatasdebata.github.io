@@ -5,6 +5,8 @@ css:
   - /assets/css/index.css
 ext-css:
   - //fonts.googleapis.com/css?family=Roboto:400,700
+js:
+  - /assets/js/animations.js
 ---
 
 <div id="header" markdown="1">
@@ -38,9 +40,9 @@ ext-css:
 
 <div id="aboutus-out" class="page-section grey-section">
   <div id="aboutus">
-    <div class="section-title">Sobre a prima Joana</div>
+    <div class="section-title fade-in">Sobre a prima Joana</div>
 
-    <div id="aboutus-text">
+    <div id="aboutus-text fade-in">
 
       A curiosidade desde sempre   <br>
       <br>
@@ -58,25 +60,25 @@ ext-css:
 
 <div id="values-out" class="page-section">
   <div id="values">
-	  <div class="section-title">Os nossos valores</div>
+	  <div class="section-title fade-in">Os nossos valores</div>
     <div class="values-grid">
-      <div class="value-item">
+      <div class="value-item fade-in-stagger">
         <h3 class="value-name">Saúde</h3>
         <p class="value-description">Prevenir a doença através de boas práticas, desporto, alimentação e vida ativa</p>
       </div>
-      <div class="value-item">
+      <div class="value-item fade-in-stagger">
         <h3 class="value-name">Humor</h3>
         <p class="value-description">O riso é a maior inspiração e mostra que somos todos iguais</p>
       </div>
-      <div class="value-item">
+      <div class="value-item fade-in-stagger">
         <h3 class="value-name">Integridade</h3>
         <p class="value-description">Respeito pelos direitos humanos e ciência baseada na evidência</p>
       </div>
-      <div class="value-item">
+      <div class="value-item fade-in-stagger">
         <h3 class="value-name">Pensamento crítico</h3>
         <p class="value-description">Ferramentas de empoderamento para melhorar a sociedade através do conhecimento</p>
       </div>
-      <div class="value-item">
+      <div class="value-item fade-in-stagger">
         <h3 class="value-name">Encantamento</h3>
         <p class="value-description">Manter a curiosidade de criança para descobrir a magia do dia-a-dia</p>
       </div>
