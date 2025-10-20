@@ -280,23 +280,17 @@ footer {
   padding: 0 1rem;
 }
 
-#values-text {
-  max-width: 1200px;
-  margin: 0 auto;
-  font-size: 9.5rem
-}
-
 #aboutus-text {
   color: #333;
   max-width: 1200px;
   margin: 0 auto;
-  font-size: 1.5rem
+  font-size: 1.5rem;
 }
 
 #values-text {
   max-width: 1200px;
   margin: 0 auto;
-  font-size: 1.5rem
+  font-size: 1.5rem;
 }
 
 @media only screen and (max-width: 750px) {
