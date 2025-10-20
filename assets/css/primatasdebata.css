@@ -70,8 +70,86 @@ footer a {
   color: #fff;
 }
 
-.actionbtn .far {
+.actionbtn .far,
+.actionbtn .fab {
   margin-right: 0.3125rem;
+}
+
+/* Button Hierarchy */
+.actionbtn-primary {
+  background: #4fc949;
+  font-weight: 600;
+}
+
+.actionbtn-primary:hover,
+.actionbtn-primary:focus {
+  background: #3fb13a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 201, 73, 0.4);
+}
+
+.actionbtn-secondary {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.actionbtn-secondary:hover,
+.actionbtn-secondary:focus {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Social Proof */
+.social-proof {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.community-size {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #4fc949;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.community-label {
+  display: block;
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+/* CTA Buttons Group */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 750px) {
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .actionbtn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .community-size {
+    font-size: 2.5rem;
+  }
+
+  .community-label {
+    font-size: 1rem;
+  }
 }
 
 .btn[disabled] {
