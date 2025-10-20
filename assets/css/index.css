@@ -1,18 +1,18 @@
 body, html {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
+  background-color: var(--color-bg-white);
+  color: var(--color-text-primary);
   margin: 0;
   padding: 0;
 }
 
 p a {
   text-decoration: none;
-  color: #1E6DE8;
+  color: var(--color-link);
 }
 p a:hover{
   text-decoration: underline;
-  color: #1E6DE8;
+  color: var(--color-link);
 }
 
 .page-section {
@@ -31,9 +31,9 @@ footer {
 #header {
   text-align: center;
   margin-top: 3.125rem;
-  background: #05172d;
+  background: var(--color-primary-dark);
   padding: 6rem 0 8rem;
-  color: #fff;
+  color: var(--color-white);
   background-image: url(/assets/img/stardust-bg.png);
   animation: animatedBackground 100s linear infinite;
 }
@@ -43,11 +43,11 @@ footer {
 }
 
 #header a {
-  color: #fff;
+  color: var(--color-white);
   text-decoration: underline;
 }
 #header a:hover {
-  color: #3380d4;
+  color: var(--color-link-hover);
 }
 #header-inner {
   display: inline-block;
@@ -78,14 +78,14 @@ footer {
 }
 #header .actionbtn {
   margin-top: 7rem;
-  color: #fff;
-  background: #05172d;
-  border: 2px solid #fff;
+  color: var(--color-white);
+  background: var(--color-primary-dark);
+  border: 2px solid var(--color-white);
 }
 #header .actionbtn:hover,
 #header .actionbtn:focus {
-  color: #05172d;
-  background: #fff;
+  color: var(--color-primary-dark);
+  background: var(--color-white);
 }
 .actionbtn {
   font-size: 1.5rem;
@@ -150,15 +150,15 @@ footer {
 
 .page-section {
   margin-top: -1px;
-  color: #615d6d;
+  color: var(--color-text-secondary);
   text-align: center;
   padding: 4.5rem 0;
-  background: #fff;
+  background: var(--color-bg-white);
 }
 
 .page-section.grey-section {
-  background: #f5f5f5;
-  text-shadow: 0 1px #fff;
+  background: var(--color-bg-grey-light);
+  text-shadow: 0 1px var(--color-white);
 }
 
 .page-section .section-title {
@@ -194,7 +194,7 @@ footer {
   width: 27rem;
 }
 #services .service:hover {
-  background: #fafafa;
+  background: var(--color-bg-grey-lighter);
 }
 #services .service-img {
   padding: 0 1rem;
@@ -235,9 +235,9 @@ footer {
 }
 
 #aboutus-out, .aboutus-buffer {
-  background: #f5f5f5;
+  background: var(--color-bg-grey-light);
   /*background: #0a1236;*/
-  color: #333;
+  color: var(--color-text-primary);
   /*background-image: url(/assets/img/back-bg.png);*/
 }
 #aboutus,
@@ -248,7 +248,7 @@ footer {
 }
 
 #aboutus-text {
-  color: #333;
+  color: var(--color-text-primary);
   max-width: 800px;
   margin: 0 auto;
   font-size: 1.5rem;
@@ -256,10 +256,10 @@ footer {
 }
 
 #values-out, .values-buffer {
-  background: #0a1236;
+  background: var(--color-bg-dark);
   /*background: #f5f5f5;*/
   /*background-image: url(/assets/img/triangles-bg.png);*/
-  color: #fff;
+  color: var(--color-white);
 }
 
 /* Values Grid Layout */
@@ -299,7 +299,7 @@ footer {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 1rem 0;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .value-description {
@@ -347,12 +347,12 @@ footer {
   max-width: 100%;
 }
 #clients .client-img:hover {
-  box-shadow: 0 0 10px #aaa;
+  box-shadow: 0 0 10px var(--color-shadow-light);
   transform: scale(1.1);
 }
 
 #portfolio-out, .portfolio-buffer {
-  background: #f5f5f5;
+  background: var(--color-bg-grey-light);
   background-image: url(/assets/img/maze-bg.png);
 }
 
