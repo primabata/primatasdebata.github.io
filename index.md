@@ -3,8 +3,6 @@ layout: base
 title: "Prima Tás de bata"
 css:
   - /assets/css/index.css
-ext-css:
-  - //fonts.googleapis.com/css?family=Roboto:400,700
 ---
 
 <div id="header" markdown="1">
