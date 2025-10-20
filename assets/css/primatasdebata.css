@@ -4,6 +4,51 @@ layout: null
 
 /* Assume 1rem=16px */
 
+/* ============================================
+   COLOR SYSTEM
+   Centralized color palette for consistency
+   ============================================ */
+
+:root {
+  /* Primary Colors */
+  --color-primary-dark: #05172d;      /* Main dark blue - navbar, headers */
+  --color-primary-light: #0a2545;     /* Lighter variant for hover states */
+
+  /* Secondary Colors */
+  --color-secondary: #0085A1;         /* Cyan accent - highlights, mobile theme */
+  --color-secondary-light: #00a8c8;   /* Lighter cyan for hover */
+  --color-secondary-dark: #006b85;    /* Darker cyan for active states */
+
+  /* Accent Colors */
+  --color-accent-green: #4fc949;      /* Primary CTA green */
+  --color-accent-green-hover: #3fb13a; /* Green hover state */
+  --color-accent-green-shadow: rgba(79, 201, 73, 0.4); /* Green shadow */
+
+  /* Neutral Colors */
+  --color-white: #fff;
+  --color-black: #000;
+  --color-text-primary: #333;         /* Main text color */
+  --color-text-secondary: #615d6d;    /* Muted text */
+  --color-text-light: #404040;        /* Light text for footer */
+
+  /* Background Colors */
+  --color-bg-white: #fff;
+  --color-bg-grey-light: #f5f5f5;     /* Light grey sections */
+  --color-bg-grey-lighter: #fafafa;   /* Even lighter grey */
+  --color-bg-dark: #0a1236;           /* Dark blue sections (values) */
+
+  /* UI Colors */
+  --color-link: #1E6DE8;              /* Link blue */
+  --color-link-hover: #3380d4;        /* Link hover */
+  --color-border-light: #EAEAEA;      /* Light borders */
+  --color-border-medium: #DDDDDD;     /* Medium borders */
+  --color-shadow-light: #aaa;         /* Light shadows */
+
+  /* Special Colors */
+  --color-sponsor: hotpink;           /* GitHub sponsors button */
+  --color-sponsor-hover: #3344bb;     /* Sponsors hover state */
+}
+
 p a {
   text-decoration: underline;
 }
@@ -14,7 +59,7 @@ p a {
 }
 
 footer a {
-  color: #404040;
+  color: var(--color-text-light);
   text-decoration: none;
 }
 
@@ -33,12 +78,12 @@ footer a {
 
 /* Support button in navbar */
 .navbar-custom .navbar-nav li a[href*="github.com/sponsors"] {
-  color: hotpink;
+  color: var(--color-sponsor);
   transition: background 300ms, color 300ms;
 }
 .navbar-custom .navbar-nav li a[href*="github.com/sponsors"]:hover {
-  background: hotpink;
-  color: #3344bb;
+  background: var(--color-sponsor);
+  color: var(--color-sponsor-hover);
 }
 @media (min-width: 768px) {
   .navbar-custom .navbar-nav .nav-item:not(.dropdown):last-child .nav-link {
@@ -56,9 +101,9 @@ footer a {
   vertical-align: middle;
   padding: 0.9375rem 3rem;
   border-radius: 5rem;
-  background: #4fc949;
+  background: var(--color-accent-green);
   font-size: 1.25rem;
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none !important;
   cursor: pointer;
   letter-spacing: 1px;
@@ -66,8 +111,8 @@ footer a {
 }
 .actionbtn:hover,
 .actionbtn:focus {
-  background: #3fb13a;
-  color: #fff;
+  background: var(--color-accent-green-hover);
+  color: var(--color-white);
 }
 
 .actionbtn .far,
@@ -77,27 +122,27 @@ footer a {
 
 /* Button Hierarchy */
 .actionbtn-primary {
-  background: #4fc949;
+  background: var(--color-accent-green);
   font-weight: 600;
 }
 
 .actionbtn-primary:hover,
 .actionbtn-primary:focus {
-  background: #3fb13a;
+  background: var(--color-accent-green-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 201, 73, 0.4);
+  box-shadow: 0 4px 12px var(--color-accent-green-shadow);
 }
 
 .actionbtn-secondary {
   background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
 }
 
 .actionbtn-secondary:hover,
 .actionbtn-secondary:focus {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: var(--color-white);
   transform: translateY(-2px);
 }
 
