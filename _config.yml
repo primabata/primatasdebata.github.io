@@ -45,7 +45,6 @@ defaults:
       path: ""
     values:
       layout: "page"
-      footer-extra: custom_footer.html
       nav-short: true
       share-description: "Prima tás de bata | Ciêncie e comunicação"
       share-img: "/assets/img/logo2.png"
