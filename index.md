@@ -11,7 +11,7 @@ ext-js:
   - //cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js
 ---
 
-<div id="header" class="cut1" markdown="1">
+<div id="header" markdown="1">
 
 <div id="header-inner" markdown="1">
 
@@ -36,11 +36,7 @@ ext-js:
 
 <div id="main-sections">
 
-
-
-<div class="cut-buffer aboutus-buffer"></div>
-
-<div id="aboutus-out" class="page-section grey-section cut2">
+<div id="aboutus-out" class="page-section grey-section">
   <div id="aboutus">
     <div class="section-title">Sobre a prima Joana</div>
 
@@ -60,9 +56,7 @@ ext-js:
   </div>
 </div>
 
-<div class="cut-buffer values-buffer"></div>
-
-<div id="values-out" class="page-section cut2">
+<div id="values-out" class="page-section">
   <div id="values">
 	  <div class="section-title">Os nossos valores</div>
     <div class="values-grid">

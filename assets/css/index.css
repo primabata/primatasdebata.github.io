@@ -15,27 +15,8 @@ p a:hover{
   color: #1E6DE8;
 }
 
-.cut1 {
-  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-}
-.cut2 {
-  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-}
-.cut-buffer {
-  width: 100%;
-  height: 4vw;
-  background: #fff;
-  margin-top: -4vw;
-}
-.page-section.cut1,
-.page-section.cut2 {
-  padding: 4.5rem 0 calc(4.5rem + 4vw);
-}
-@media only screen and (max-width: 1899px) {
-  .page-section.cut1,
-  .page-section.cut2 {
-    padding: 4.5rem 0 calc(4.5rem + 5vw);
-  }
+.page-section {
+  padding: 4rem 0;
 }
 
 footer {
@@ -66,7 +47,7 @@ footer {
   text-align: center;
   margin-top: 3.125rem;
   background: #05172d;
-  padding: 10rem 0 13rem;
+  padding: 6rem 0 8rem;
   color: #fff;
   background-image: url(/assets/img/stardust-bg.png);
   animation: animatedBackground 100s linear infinite;
@@ -133,7 +114,7 @@ footer {
 
 @media only screen and (max-width: 1899px) {
   #header {
-    padding: 10rem 0;
+    padding: 6rem 0 7rem;
   }
 }
 
@@ -275,16 +256,19 @@ footer {
   color: #333;
   /*background-image: url(/assets/img/back-bg.png);*/
 }
-#aboutus, 
+#aboutus,
 #values {
-  padding: 0 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 #aboutus-text {
   color: #333;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   font-size: 1.5rem;
+  line-height: 1.7;
 }
 
 #values-out, .values-buffer {
