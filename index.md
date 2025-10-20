@@ -19,8 +19,8 @@ ext-js:
 
 ## Ciência para todos! {#subtitle}
 
-#### A cientista lá do bairro na luta contra a desinformação científica em Portugal.  
-#### Uma comunidade de 3000+ pessoas curiosas e informadas 
+#### A cientista lá do bairro na luta contra a desinformação científica em Portugal.
+#### Uma comunidade de 4000+ pessoas curiosas e informadas 
 
 <a href="/contact" class="actionbtn">
   <span class="far fa-envelope" aria-hidden="true"></span>
@@ -67,27 +67,22 @@ ext-js:
 	  <div class="section-title">Os nossos valores</div>
     <div class="values-grid">
       <div class="value-item">
-        <div class="value-icon">🏥</div>
         <h3 class="value-name">Saúde</h3>
         <p class="value-description">Prevenir a doença através de boas práticas, desporto, alimentação e vida ativa</p>
       </div>
       <div class="value-item">
-        <div class="value-icon">😄</div>
         <h3 class="value-name">Humor</h3>
         <p class="value-description">O riso é a maior inspiração e mostra que somos todos iguais</p>
       </div>
       <div class="value-item">
-        <div class="value-icon">⚖️</div>
         <h3 class="value-name">Integridade</h3>
         <p class="value-description">Respeito pelos direitos humanos e ciência baseada na evidência</p>
       </div>
       <div class="value-item">
-        <div class="value-icon">🧠</div>
         <h3 class="value-name">Pensamento crítico</h3>
         <p class="value-description">Ferramentas de empoderamento para melhorar a sociedade através do conhecimento</p>
       </div>
       <div class="value-item">
-        <div class="value-icon">✨</div>
         <h3 class="value-name">Encantamento</h3>
         <p class="value-description">Manter a curiosidade de criança para descobrir a magia do dia-a-dia</p>
       </div>
