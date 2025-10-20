@@ -4,6 +4,55 @@ body, html {
   color: #333;
   margin: 0;
   padding: 0;
+  line-height: 1.7;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 750px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
 }
 
 p a {
@@ -39,7 +88,7 @@ footer {
 }
 #header h1,
 #header h2 {
-  font-family: Roboto;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #header a {
@@ -162,17 +211,17 @@ footer {
 }
 
 .page-section .section-title {
-  font-size: 5rem;
+  font-size: 3rem;
   line-height: 1.3;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 @media only screen and (max-width: 650px) {
   .page-section .section-title {
-    font-size: 2.75rem;
-    margin-bottom: 3rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
   #clients-subtitle {
     margin-top: -2.5rem;
