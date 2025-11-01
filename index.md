@@ -38,18 +38,20 @@ css:
   <div id="aboutus">
     <div class="section-title">Sobre a prima Joana</div>
 
-    <div id="aboutus-text">
+    <div id="aboutus-content">
+      <div id="aboutus-photo">
+        <img src="/assets/img/joana-profile.jpg" alt="Joana - Prima Tás de Bata" class="profile-photo">
+      </div>
 
-      A curiosidade desde sempre   <br>
-      <br>
+      <div id="aboutus-text">
+        <p class="aboutus-intro">A curiosidade desde sempre</p>
 
-      A PRIMA, TÁS DE BATA cresceu a fazer experiências em casa, na escola e no jardim.  
-      A Joana fazia questão de perguntar o porquê das coisas, e ao crescer tornou-se cientista. 
-      Depois de ser investigadora durante muitos anos e de conseguir o seu doutoramento, percebeu que o maior impacto é trocar a ciência por miúdos. 
-      A Prima acredita que, se as pessoas tiverem confiança nos cientistas, poderão descobrir que a ciência pode resolver muitos problemas e encantar-nos ao mesmo tempo.  
-        <br><br>
-      Junta-te à brigada anti-desinformação, por um mundo com mais ciência!
+        <p><strong>A PRIMA, TÁS DE BATA</strong> cresceu a fazer experiências em casa, na escola e no jardim. A Joana fazia questão de perguntar o porquê das coisas, e ao crescer tornou-se cientista.</p>
 
+        <p>Depois de ser investigadora durante muitos anos e de conseguir o seu doutoramento, percebeu que o maior impacto é <strong>trocar a ciência por miúdos</strong>. A Prima acredita que, se as pessoas tiverem confiança nos cientistas, poderão descobrir que a ciência pode resolver muitos problemas e encantar-nos ao mesmo tempo.</p>
+
+        <p class="aboutus-cta">Junta-te à <strong>brigada anti-desinformação</strong>, por um mundo com mais ciência!</p>
+      </div>
     </div>
   </div>
 </div>
