@@ -1,8 +1,0 @@
-<svg width="280" height="280" xmlns="http://www.w3.org/2000/svg">
-  <!-- Placeholder for Joana's profile photo -->
-  <!-- Replace with actual photo: joana-profile.jpg (280x280px minimum) -->
-  <rect width="280" height="280" fill="#0085A1"/>
-  <circle cx="140" cy="100" r="45" fill="#fff" opacity="0.3"/>
-  <path d="M 80 180 Q 140 150 200 180 L 200 280 L 80 280 Z" fill="#fff" opacity="0.3"/>
-  <text x="140" y="250" font-family="Arial, sans-serif" font-size="16" fill="#fff" text-anchor="middle" opacity="0.8">Prima Joana</text>
-</svg>

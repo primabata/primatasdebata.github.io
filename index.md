@@ -42,7 +42,7 @@ ext-css:
 
     <div id="aboutus-content">
       <div id="aboutus-photo">
-        <img src="/assets/img/joana-profile.svg" alt="Joana - Prima Tás de Bata" class="profile-photo">
+        <img src="/assets/img/joana-profile.jpg" alt="Joana - Prima Tás de Bata" class="profile-photo">
       </div>
 
       <div id="aboutus-text">
