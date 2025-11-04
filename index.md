@@ -21,7 +21,7 @@ js:
 #### Uma comunidade de 4000+ pessoas curiosas e informadas
 
 <div class="cta-buttons">
-  <a href="https://instagram.com/primatasdebata" class="actionbtn actionbtn-primary" target="_blank" rel="noopener">
+  <a href="https://instagram.com/primatasdebata" class="actionbtn actionbtn-secondary" target="_blank" rel="noopener">
     <span class="fab fa-instagram" aria-hidden="true"></span>
     Seguir no Instagram
   </a>
@@ -86,7 +86,7 @@ js:
         <p class="value-description">Manter a curiosidade de criança para descobrir a magia do dia-a-dia</p>
       </div>
     </div>
-    <a href="/contact" class="actionbtn">
+    <a href="/contact" class="actionbtn actionbtn-secondary">
       Trabalhe Connosco
     </a>
   </div>

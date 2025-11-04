@@ -10,14 +10,14 @@ layout: null
    ============================================ */
 
 :root {
-  /* Primary Colors */
-  --color-primary-dark: #05172d;      /* Main dark blue - navbar, headers */
-  --color-primary-light: #0a2545;     /* Lighter variant for hover states */
+  /* Primary Colors - Brand Burgundy Purple */
+  --color-primary-dark: #4A2545;      /* Deep burgundy purple - navbar, headers */
+  --color-primary-light: #5c3357;     /* Lighter burgundy for hover states */
 
-  /* Secondary Colors */
-  --color-secondary: #0085A1;         /* Cyan accent - highlights, mobile theme */
-  --color-secondary-light: #00a8c8;   /* Lighter cyan for hover */
-  --color-secondary-dark: #006b85;    /* Darker cyan for active states */
+  /* Secondary Colors - Brand Coral/Terracotta */
+  --color-secondary: #D4907B;         /* Coral/terracotta accent - highlights, badges */
+  --color-secondary-light: #E5A896;   /* Lighter coral for hover */
+  --color-secondary-dark: #B86A5A;    /* Darker coral for active states */
 
   /* Accent Colors */
   --color-accent-green: #4fc949;      /* Primary CTA green */
@@ -31,15 +31,15 @@ layout: null
   --color-text-secondary: #615d6d;    /* Muted text */
   --color-text-light: #404040;        /* Light text for footer */
 
-  /* Background Colors */
+  /* Background Colors - Brand Cream/Beige */
   --color-bg-white: #fff;
-  --color-bg-grey-light: #f5f5f5;     /* Light grey sections */
-  --color-bg-grey-lighter: #fafafa;   /* Even lighter grey */
-  --color-bg-dark: #0a1236;           /* Dark blue sections (values) */
+  --color-bg-grey-light: #F5EFE6;     /* Warm cream background */
+  --color-bg-grey-lighter: #FAF7F2;   /* Even lighter cream */
+  --color-bg-dark: #3a1f36;           /* Dark burgundy sections (values) */
 
   /* UI Colors */
-  --color-link: #1E6DE8;              /* Link blue */
-  --color-link-hover: #3380d4;        /* Link hover */
+  --color-link: #D4907B;              /* Coral link color (brand) */
+  --color-link-hover: #B86A5A;        /* Darker coral hover */
   --color-border-light: #EAEAEA;      /* Light borders */
   --color-border-medium: #DDDDDD;     /* Medium borders */
   --color-shadow-light: #aaa;         /* Light shadows */
@@ -134,15 +134,15 @@ footer a {
 }
 
 .actionbtn-secondary {
-  background: transparent;
-  border: 2px solid var(--color-white);
-  color: var(--color-white);
+  background: transparent !important;
+  border: 2px solid var(--color-primary-dark);
+  color: var(--color-primary-dark) !important;
 }
 
 .actionbtn-secondary:hover,
 .actionbtn-secondary:focus {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
+  background: var(--color-primary-dark) !important;
+  color: var(--color-white) !important;
   transform: translateY(-2px);
 }
 

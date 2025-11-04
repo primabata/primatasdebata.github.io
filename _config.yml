@@ -6,8 +6,8 @@ title: Prima tás de bata
 author: Joana Wilton
 
 navbar-links:
-  Serviços: "/#services"
-  Sobre nós: "/#aboutus"
+  # Serviços: "/#services"
+  Sobre nós: "/about"
   Contacto: "/contact"
 
 title-img: /assets/img/logo1.png
@@ -16,14 +16,15 @@ site-css: "/assets/css/primatasdebata.css"
 
 keywords: "science, communication, education"
 
-mobile-theme-col: "#0085A1"
-navbar-col: "#05172d"
-navbar-text-col: "#fff"
-navbar-border-col: "#05172d"
+mobile-theme-col: "#4A2545"
+navbar-col: "#fff"
+navbar-text-col: "#4A2545"
+navbar-border-col: "#EAEAEA"
 
 social-network-links:
   email: "primatasdebata@gmail.com"
   instagram: primatasdebata
+  linkedin: joanawilton
 
 
 url-pretty: "Primatasdebata.com"
