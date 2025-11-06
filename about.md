@@ -10,7 +10,7 @@ css:
 <div class="page-section">
   <div class="section-content">
     <h1 class="section-title">A Prima nos Media</h1>
-    <p class="section-intro">Acompanhe as aparições da Prima Tás de Bata nos media portugueses, desde podcasts a artigos, na missão de levar ciência a todos.</p>
+    <p class="section-intro">Acompanha as aparições da Prima nos media portugueses, desde podcasts a artigos, na missão de levar ciência a todos.</p>
   </div>
 </div>
 
