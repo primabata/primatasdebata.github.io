@@ -58,6 +58,9 @@ js:
         <p class="aboutus-cta">Junta-te à <strong>brigada anti-desinformação</strong>, por um mundo com mais ciência!</p>
       </div>
     </div>
+    <a href="/about" class="actionbtn actionbtn-secondary" style="margin-bottom: 2rem;">
+      Sobre a Prima
+    </a>
   </div>
 </div>
 
