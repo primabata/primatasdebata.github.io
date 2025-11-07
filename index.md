@@ -59,7 +59,7 @@ js:
       </div>
     </div>
     <a href="/about" class="actionbtn actionbtn-secondary" style="margin-bottom: 2rem;">
-      Sobre a Prima
+      Mais sobre a Prima
     </a>
   </div>
 </div>
