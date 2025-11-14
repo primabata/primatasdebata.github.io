@@ -28,7 +28,7 @@ css:
         <p class="media-description">RDP Internacional - 38 episódios sobre saúde, mitos científicos e temas ambientais, com linguagem acessível e humor.</p>
         <a href="https://rdpinternacional.rtp.pt/podcast/exame-de-ciencias" class="media-link" target="_blank" rel="noopener">
           <span class="fas fa-external-link-alt" aria-hidden="true"></span>
-          Ver Podcast
+          Ouvir Podcast
         </a>
       </div>
 
