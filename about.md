@@ -34,6 +34,19 @@ css:
 
       <div class="media-card">
         <div class="media-thumbnail media-thumbnail-youtube">
+          <img src="https://img.youtube.com/vi/WYd0TeiaeAA/hqdefault.jpg" alt="Marias há muitas">
+        </div>
+        <div class="media-year">2025</div>
+        <h3 class="media-outlet">Marias há muitas</h3>
+        <p class="media-description">Podcast com Catarina Morgado - Comunicar ciência sem tédio e com muito humor.</p>
+        <a href="https://www.youtube.com/watch?v=WYd0TeiaeAA" class="media-link" target="_blank" rel="noopener">
+          <span class="fab fa-youtube" aria-hidden="true"></span>
+          Ver no YouTube
+        </a>
+      </div>
+
+      <div class="media-card">
+        <div class="media-thumbnail media-thumbnail-youtube">
           <img src="https://img.youtube.com/vi/J33q1AYtocY/hqdefault.jpg" alt="Somos Todos Malucos">
         </div>
         <div class="media-year">2025</div>
