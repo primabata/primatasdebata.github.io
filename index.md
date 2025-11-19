@@ -3,11 +3,14 @@ layout: base
 title: "Prima Tás de bata"
 css:
   - /assets/css/index.css
+  - /assets/css/accessibility.css
 ext-css:
   - //fonts.googleapis.com/css?family=Roboto:400,700
 js:
   - /assets/js/animations.js
 ---
+
+{% include skip-navigation.html %}
 
 <div id="header" markdown="1">
 
@@ -36,14 +39,13 @@ js:
 
 </div>
 
-<div id="main-sections">
+<main id="main-content" role="main">
 
-<div id="aboutus-out" class="page-section grey-section">
+<section id="aboutus-out" class="page-section grey-section" aria-labelledby="aboutus-heading">
   <div id="aboutus">
-    <div class="section-title fade-in">Sobre a prima Joana</div>
+    <h2 id="aboutus-heading" class="section-title fade-in">Sobre a prima Joana</h2>
 
-    <div id="aboutus-text fade-in">
-    <div id="aboutus-content">
+    <div id="aboutus-content" class="fade-in">
       <div id="aboutus-photo">
         <img src="/assets/img/joana-profile.jpg" alt="Joana - Prima Tás de Bata" class="profile-photo">
       </div>
@@ -58,15 +60,15 @@ js:
         <p class="aboutus-cta">Junta-te à <strong>brigada anti-desinformação</strong>, por um mundo com mais ciência!</p>
       </div>
     </div>
-    <a href="/about" class="actionbtn actionbtn-secondary" style="margin-bottom: 2rem;">
+    <a href="/about" class="actionbtn actionbtn-secondary" style="margin-bottom: 2rem;" aria-label="Saber mais sobre a Prima Joana">
       Mais sobre a Prima
     </a>
   </div>
-</div>
+</section>
 
-<div id="values-out" class="page-section">
+<section id="values-out" class="page-section" aria-labelledby="values-heading">
   <div id="values">
-	  <div class="section-title fade-in">Os nossos valores</div>
+    <h2 id="values-heading" class="section-title fade-in">Os nossos valores</h2>
     <div class="values-grid">
       <div class="value-item fade-in-stagger">
         <h3 class="value-name">Saúde</h3>
@@ -89,11 +91,11 @@ js:
         <p class="value-description">Manter a curiosidade de criança para descobrir a magia do dia-a-dia</p>
       </div>
     </div>
-    <a href="/contact" class="actionbtn actionbtn-secondary">
+    <a href="/contact" class="actionbtn actionbtn-secondary" aria-label="Contactar para trabalhar connosco">
       Trabalhe Connosco
     </a>
   </div>
-</div>
+</section>
 
-</div>
+</main>
 

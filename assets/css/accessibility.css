@@ -1,0 +1,492 @@
+---
+layout: null
+---
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   WCAG 2.1 AA Compliance
+   ============================================ */
+
+/* ============================================
+   SKIP NAVIGATION LINK
+   Allows keyboard users to skip to main content
+   ============================================ */
+
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary-dark, #4A2545);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  z-index: 10000;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ENHANCED FOCUS INDICATORS
+   Visible focus states for all interactive elements
+   ============================================ */
+
+/* Global focus styles */
+*:focus {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 3px;
+}
+
+/* Remove default outline only when custom is applied */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Focus-visible for keyboard navigation only */
+*:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 3px;
+}
+
+/* Links */
+a:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Buttons */
+button:focus-visible,
+.actionbtn:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="button"]:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(212, 144, 123, 0.3);
+}
+
+/* Form inputs */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 0;
+  border-color: var(--color-secondary, #D4907B);
+}
+
+/* Navigation links */
+.navbar-nav .nav-link:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 2px;
+  background: rgba(212, 144, 123, 0.1);
+  border-radius: 4px;
+}
+
+/* Cards and interactive containers */
+.value-item:focus-visible,
+.media-card:focus-visible {
+  outline: 3px solid var(--color-secondary, #D4907B);
+  outline-offset: 4px;
+}
+
+/* Social links */
+.bio-social-button:focus-visible {
+  outline: 3px solid var(--color-white, #fff);
+  outline-offset: 3px;
+}
+
+/* Back to top button */
+#back-to-top:focus-visible {
+  outline: 3px solid var(--color-white, #fff);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   SCREEN READER UTILITIES
+   ============================================ */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Show on focus (for skip links) */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   IMPROVED COLOR CONTRAST
+   Ensure text meets WCAG AA standards (4.5:1)
+   ============================================ */
+
+/* Ensure links have sufficient contrast */
+a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* Placeholder text contrast */
+::placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+/* Selection contrast */
+::selection {
+  background: var(--color-secondary, #D4907B);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: var(--color-secondary, #D4907B);
+  color: #fff;
+}
+
+/* ============================================
+   KEYBOARD NAVIGATION IMPROVEMENTS
+   ============================================ */
+
+/* Ensure all interactive elements are tabbable */
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Tab order indicator for debugging (remove in production) */
+/*
+[tabindex]:focus {
+  position: relative;
+}
+[tabindex]:focus::after {
+  content: attr(tabindex);
+  position: absolute;
+  top: -20px;
+  right: 0;
+  background: red;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+*/
+
+/* ============================================
+   REDUCED MOTION PREFERENCES
+   Respect user's motion preferences
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep focus indicators visible */
+  *:focus,
+  *:focus-visible {
+    transition: none !important;
+  }
+
+  /* Disable parallax and scroll effects */
+  .parallax {
+    background-attachment: scroll !important;
+  }
+
+  /* Show animated elements immediately */
+  .fade-in,
+  .fade-in-stagger {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE SUPPORT
+   ============================================ */
+
+@media (forced-colors: active) {
+  /* Ensure borders are visible */
+  .actionbtn,
+  .value-item,
+  .media-card,
+  input,
+  textarea,
+  select {
+    border: 2px solid currentColor !important;
+  }
+
+  /* Ensure focus is visible */
+  *:focus {
+    outline: 3px solid currentColor !important;
+  }
+
+  /* Links should be distinguishable */
+  a {
+    text-decoration: underline !important;
+  }
+
+  /* Buttons need clear boundaries */
+  button,
+  [role="button"] {
+    border: 2px solid currentColor !important;
+  }
+}
+
+/* ============================================
+   FORM ACCESSIBILITY
+   ============================================ */
+
+/* Required field indicator */
+.required::after {
+  content: " *";
+  color: #c00;
+}
+
+/* Error states */
+.error,
+.is-invalid {
+  border-color: #c00 !important;
+  outline-color: #c00;
+}
+
+.error-message {
+  color: #c00;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Success states */
+.success,
+.is-valid {
+  border-color: #0a0 !important;
+}
+
+/* Form labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/* Fieldset and legend */
+fieldset {
+  border: 2px solid var(--color-border-light, #EAEAEA);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+legend {
+  font-weight: 700;
+  padding: 0 0.5rem;
+}
+
+/* ============================================
+   LINK ACCESSIBILITY
+   ============================================ */
+
+/* External links indicator */
+a[target="_blank"]::after {
+  content: " \f35d"; /* Font Awesome external link icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  vertical-align: super;
+}
+
+/* Skip the icon for buttons and specific elements */
+.actionbtn[target="_blank"]::after,
+.bio-social-button[target="_blank"]::after,
+a[target="_blank"].no-external-icon::after {
+  content: none;
+}
+
+/* Visited links */
+a:visited {
+  color: var(--color-link-hover, #B86A5A);
+}
+
+/* ============================================
+   IMAGE ACCESSIBILITY
+   ============================================ */
+
+/* Ensure images without alt have visible border */
+img:not([alt]),
+img[alt=""] {
+  outline: 3px dashed #c00;
+}
+
+/* Decorative images */
+img[role="presentation"],
+img[alt=""] {
+  outline: none;
+}
+
+/* ============================================
+   TABLE ACCESSIBILITY
+   ============================================ */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-weight: 700;
+  background: var(--color-bg-grey-light, #F5EFE6);
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border-medium, #DDDDDD);
+}
+
+caption {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+/* ============================================
+   LANDMARK REGIONS
+   Semantic structure for screen readers
+   ============================================ */
+
+/* Main content area */
+main,
+[role="main"] {
+  outline: none;
+}
+
+/* Navigation */
+nav,
+[role="navigation"] {
+  outline: none;
+}
+
+/* Complementary content */
+aside,
+[role="complementary"] {
+  outline: none;
+}
+
+/* ============================================
+   ANIMATION PAUSE CONTROLS
+   ============================================ */
+
+/* Pause button for animations */
+.animation-toggle {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  z-index: 999;
+  background: var(--color-primary-dark, #4A2545);
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.animation-toggle:hover {
+  background: var(--color-primary-light, #5c3357);
+}
+
+/* ============================================
+   PRINT ACCESSIBILITY
+   ============================================ */
+
+@media print {
+  /* Show URLs after links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^="/"]::after,
+  a[href^="#"]::after {
+    content: none;
+  }
+
+  /* Ensure good contrast */
+  * {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Hide interactive elements */
+  .skip-to-content,
+  #back-to-top,
+  .animation-toggle {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   TOUCH TARGET SIZES
+   Minimum 44x44px for touch accessibility
+   ============================================ */
+
+/* Ensure minimum touch target size */
+a, button, input, select, textarea,
+[role="button"], [role="link"] {
+  min-height: 44px;
+}
+
+/* Inline elements can be smaller */
+p a, li a, span a {
+  min-height: auto;
+  padding: 0.25rem 0;
+}
+
+/* ============================================
+   TEXT SPACING ACCESSIBILITY
+   Support for user text spacing preferences
+   ============================================ */
+
+/* Allow text to reflow with increased spacing */
+body {
+  line-height: 1.5;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+/* Ensure content is not lost with increased spacing */
+* {
+  max-height: none !important;
+}
