@@ -90,7 +90,7 @@ js:
       </div>
     </div>
     <a href="/contact" class="actionbtn actionbtn-secondary">
-      Contacta a prima
+      Contacta a Prima
     </a>
   </div>
 </div>
