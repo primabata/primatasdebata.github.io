@@ -3,9 +3,12 @@ layout: base
 title: "A Prima nos Media - Prima Tás de bata"
 css:
   - /assets/css/index.css
+  - /assets/css/accessibility.css
 ---
 
-<div id="main-sections">
+{% include skip-navigation.html %}
+
+<main id="main-content" role="main">
 
 <div class="page-section">
   <div class="section-content">
@@ -237,4 +240,4 @@ css:
   </div>
 </div>
 
-</div>
+</main>
