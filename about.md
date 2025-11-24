@@ -92,7 +92,6 @@ css:
         </a>
       </div>
 
-    <div class="media-grid">
       <div class="media-card">
         <div class="media-thumbnail media-thumbnail-image">
           <img src="https://prochildcolab.pt/wp-content/uploads/2022/10/publico.jpg" alt="Público">
