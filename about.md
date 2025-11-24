@@ -92,6 +92,20 @@ css:
         </a>
       </div>
 
+    <div class="media-grid">
+      <div class="media-card">
+        <div class="media-thumbnail media-thumbnail-image">
+          <img src="https://prochildcolab.pt/wp-content/uploads/2022/10/publico.jpg" alt="Público">
+        </div>
+        <div class="media-year">2025</div>
+        <h3 class="media-outlet">Público</h3>
+        <p class="media-description">Artigo de opinião "Quem tem medo da cultura científica?" - A desinformação, pensamento crítico e literacia científica.</p>
+        <a href="https://www.publico.pt/2025/11/24/ciencia/opiniao/medo-cultura-cientifica-2155855?#" class="media-link" target="_blank" rel="noopener">
+          <span class="fas fa-external-link-alt" aria-hidden="true"></span>
+          Ler Artigo
+        </a>
+      </div>
+
       <div class="media-card">
         <div class="media-thumbnail media-thumbnail-image">
           <img src="https://comunidadeculturaearte.com/wp-content/themes/cca/assets/img/cca_190.png" alt="Comunidade Cultura e Arte">
