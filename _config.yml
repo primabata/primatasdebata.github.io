@@ -12,7 +12,9 @@ navbar-links:
 
 title-img: /assets/img/logo1.png
 
-site-css: "/assets/css/primatasdebata.css"
+site-css:
+  - "/assets/css/primatasdebata.css"
+  - "/assets/css/responsive.css"
 
 keywords: "science, communication, education"
 

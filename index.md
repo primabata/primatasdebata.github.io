@@ -42,8 +42,7 @@ js:
   <div id="aboutus">
     <div class="section-title fade-in">Sobre a prima Joana</div>
 
-    <div id="aboutus-text fade-in">
-    <div id="aboutus-content">
+    <div id="aboutus-content" class="fade-in">
       <div id="aboutus-photo">
         <img src="/assets/img/joana-profile.jpg" alt="Joana - Prima Tás de Bata" class="profile-photo">
       </div>
