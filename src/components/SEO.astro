@@ -1,0 +1,55 @@
+---
+import { siteConfig } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = siteConfig.shareImage,
+  canonical = Astro.url.href
+} = Astro.props;
+
+const fullTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.title}`;
+const imageUrl = new URL(image, siteConfig.url).href;
+---
+
+<!-- Primary Meta Tags -->
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<meta name="keywords" content={siteConfig.keywords} />
+<meta name="author" content={siteConfig.author} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={siteConfig.title} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<!-- Google Analytics -->
+{siteConfig.gtag && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.gtag}`}></script>
+    <script is:inline define:vars={{ gtag: siteConfig.gtag }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtag);
+    </script>
+  </>
+)}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://primatasdebata.pt/sitemap-index.xml

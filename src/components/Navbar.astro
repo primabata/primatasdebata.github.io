@@ -1,0 +1,42 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-brand">
+      <img src={siteConfig.logo} alt={siteConfig.title} />
+    </a>
+
+    <button class="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="fas fa-bars"></span>
+    </button>
+
+    <ul class="navbar-nav" id="navbar-nav">
+      {siteConfig.navLinks.map((link) => (
+        <li>
+          <a href={link.href}>{link.name}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.querySelector('.navbar-toggle');
+  const nav = document.getElementById('navbar-nav');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', (!expanded).toString());
+    nav?.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!toggle?.contains(e.target as Node) && !nav?.contains(e.target as Node)) {
+      toggle?.setAttribute('aria-expanded', 'false');
+      nav?.classList.remove('active');
+    }
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  year: string;
+  outlet: string;
+  description: string;
+  link: string;
+  linkText: string;
+  linkIcon?: string;
+  thumbnail?: {
+    type: 'youtube' | 'image' | 'podcast' | 'radio' | 'article' | 'award' | 'event' | 'tv';
+    src?: string;
+    alt?: string;
+    icon?: string;
+  };
+}
+
+const { year, outlet, description, link, linkText, linkIcon = 'fas fa-external-link-alt', thumbnail } = Astro.props;
+
+const getThumbnailClass = (type?: string) => {
+  if (!type) return 'media-thumbnail';
+  const typeClasses: Record<string, string> = {
+    youtube: 'media-thumbnail media-thumbnail-youtube',
+    image: 'media-thumbnail media-thumbnail-image',
+    podcast: 'media-thumbnail media-thumbnail-podcast',
+    radio: 'media-thumbnail media-thumbnail-radio',
+    article: 'media-thumbnail media-thumbnail-article',
+    award: 'media-thumbnail media-thumbnail-award',
+    event: 'media-thumbnail media-thumbnail-event',
+    tv: 'media-thumbnail media-thumbnail-tv'
+  };
+  return typeClasses[type] || 'media-thumbnail';
+};
+---
+
+<div class="media-card">
+  {thumbnail && (
+    <div class={getThumbnailClass(thumbnail.type)}>
+      {thumbnail.src ? (
+        <img src={thumbnail.src} alt={thumbnail.alt || outlet} />
+      ) : (
+        <span class={thumbnail.icon || 'fas fa-microphone'}></span>
+      )}
+    </div>
+  )}
+  <div class="media-year">{year}</div>
+  <h3 class="media-outlet">{outlet}</h3>
+  <p class="media-description">{description}</p>
+  <a href={link} class="media-link" target="_blank" rel="noopener">
+    <span class={linkIcon} aria-hidden="true"></span>
+    {linkText}
+  </a>
+</div>

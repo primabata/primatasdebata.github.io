@@ -1,0 +1,37 @@
+---
+---
+
+<button id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <span aria-hidden="true">&uarr;</span>
+</button>
+
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  function toggleBackToTop() {
+    if (window.pageYOffset > 300) {
+      backToTopBtn?.classList.add('visible');
+    } else {
+      backToTopBtn?.classList.remove('visible');
+    }
+  }
+
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  let scrollTimeout: number;
+  window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = window.requestAnimationFrame(() => {
+      toggleBackToTop();
+    });
+  });
+
+  toggleBackToTop();
+</script>

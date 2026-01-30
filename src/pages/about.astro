@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MediaCard from '../components/MediaCard.astro';
+
+const podcasts = [
+  {
+    year: '2024',
+    outlet: 'Podcast Exame de Ciências',
+    description: 'RDP Internacional - 38 episódios sobre saúde, mitos científicos e temas ambientais, com linguagem acessível e humor.',
+    link: 'https://rdpinternacional.rtp.pt/podcast/exame-de-ciencias',
+    linkText: 'Ver Podcast',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://rdpinternacional.rtp.pt/wp-content/uploads/2024/02/EXAME_DE_CIENCIA_1500-300x300.jpg',
+      alt: 'Exame de Ciências'
+    }
+  },
+  {
+    year: '2025',
+    outlet: 'Somos Todos Malucos',
+    description: 'Podcast com António Raminhos - Conversa sobre ciência, saúde mental e o papel da comunicação científica.',
+    link: 'https://www.youtube.com/watch?v=J33q1AYtocY',
+    linkText: 'Ver no YouTube',
+    linkIcon: 'fab fa-youtube',
+    thumbnail: {
+      type: 'youtube' as const,
+      src: 'https://img.youtube.com/vi/J33q1AYtocY/hqdefault.jpg',
+      alt: 'Somos Todos Malucos'
+    }
+  },
+  {
+    year: '2024',
+    outlet: 'Antena 1 - Semana de...',
+    description: 'RTP - Reportagem sobre o projeto Prima Tás de Bata e a abordagem humorística da comunicação científica.',
+    link: 'https://www.rtp.pt/play/p13896/e810540/semana-de',
+    linkText: 'Ouvir na RTP',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://cdn-images.rtp.pt/EPG/radio/imagens/7982_12512_63866.png?q=90&format=pjpg&auto=webp&v=3&w=275&auto=enhance&vib=52',
+      alt: 'Antena 1 - Semana de'
+    }
+  }
+];
+
+const articles = [
+  {
+    year: '2025',
+    outlet: 'Público',
+    description: 'Artigo de opinião "Um dia sem ciência" - Reflexão sobre a importância da ciência no nosso quotidiano.',
+    link: 'https://www.publico.pt/2025/05/16/ciencia/opiniao/dia-ciencia-2132808',
+    linkText: 'Ler Artigo',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://prochildcolab.pt/wp-content/uploads/2022/10/publico.jpg',
+      alt: 'Público'
+    }
+  },
+  {
+    year: '2025',
+    outlet: 'Comunidade Cultura e Arte',
+    description: 'Reportagem "Dez jovens que dão voz à ciência em Portugal" - Perfil sobre Joana Wilton e o projeto Prima Tás de Bata.',
+    link: 'https://comunidadeculturaearte.com/reportagem-dez-jovens-que-dao-voz-a-ciencia-em-portugal/',
+    linkText: 'Ler Reportagem',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://comunidadeculturaearte.com/wp-content/themes/cca/assets/img/cca_190.png',
+      alt: 'Comunidade Cultura e Arte'
+    }
+  },
+  {
+    year: '2019',
+    outlet: 'Notícias UP',
+    description: 'Reconhecimento académico - Prémio de Melhor Comunicação Oral em conferência sobre cancro pelo trabalho no i3S.',
+    link: 'https://noticias.up.pt/2019/07/01/investigadora-do-i3s-premiada-em-conferencia-sobre-cancro/',
+    linkText: 'Ler Notícia',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://noticias.up.pt/wp-content/uploads/2019/09/noticiasup_logo_d_right_400x180_v3_3.png',
+      alt: 'Notícias UP'
+    }
+  },
+  {
+    year: '2017',
+    outlet: 'PubHD Porto',
+    description: 'Apresentação pública "Como se comunica num ambiente de cancro?" - Explicação da investigação de doutoramento em ambiente informal.',
+    link: 'https://pubhdporto.wordpress.com/2017/02/25/como-se-comunica-num-ambiente-de-cancro/',
+    linkText: 'Ver Evento',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://pubhdporto.wordpress.com/wp-content/uploads/2017/08/cropped-logo-face-4.jpg',
+      alt: 'PubHD Porto'
+    }
+  }
+];
+
+const tvVideos = [
+  {
+    year: '2019',
+    outlet: 'Porto Canal',
+    description: 'Reportagem televisiva sobre o trabalho de investigação e comunicação científica.',
+    link: 'https://www.facebook.com/watch/?v=372560026776129',
+    linkText: 'Ver no Facebook',
+    linkIcon: 'fab fa-facebook',
+    thumbnail: {
+      type: 'image' as const,
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP2OFbIa2PmGNjwgoEcljje3Iekmu1bCtf7hj6B_5B1oudbuUhr_sTKYvkauV9aWZHCxhxwCzLw_okeClZ7Zuj8-n-AiTBqxj1ZrVpcQ&s=10',
+      alt: 'Porto Canal'
+    }
+  }
+];
+
+const publications = [
+  { year: '2023', text: 'Wilton et al. - Pro-inflammatory polarization and colorectal cancer modulate alternative and intronic polyadenylation in primary human macrophages', doi: 'http://dx.doi.org/10.3389/fimmu.2023.1182525' },
+  { year: '2023', text: 'Veiga et al. - Cell division protein FtsK coordinates bacterial chromosome segregation and daughter cell separation in Staphylococcus aureus', doi: 'https://doi.org/10.15252/embj.2022112140' },
+  { year: '2022', text: 'Ricardo et al. - Searching for SARS-CoV-2 in Cancer Tissues: Results of an Extensive Methodologic Approach based on ACE2 and Furin Expression', doi: 'https://www.mdpi.com/2072-6694/14/11/2582' },
+  { year: '2021', text: 'Wilton et al. - Simultaneous studies of gene expression and alternative polyadenylation in primary human immune cells', doi: 'https://doi.org/10.1016/bs.mie.2021.04.004' },
+  { year: '2017', text: 'Brito et al. - Absence of tmRNA Has a Protective Effect against Fluoroquinolones in Streptococcus pneumoniae', doi: 'http://journal.frontiersin.org/article/10.3389/fmicb.2016.02164' },
+  { year: '2015', text: 'Wilton et al. - Small regulatory RNAs in Streptococcus pneumoniae: discovery and biological functions', doi: 'http://journal.frontiersin.org/article/10.3389/fgene.2015.00126/abstract' }
+];
+
+const awards = [
+  { year: '2019', text: 'Travel Grant COST Action DARTER (União Europeia) para o Congresso Eukaryotic mRNA Processing, Cold Spring Harbor Laboratory, United States' },
+  { year: '2019', text: 'Melhor apresentação em poster, ptRNA 2019 - Congresso Nacional de RNA 2019, Portugal' },
+  { year: '2019', text: 'Melhor apresentação oral, SICR 2019 - Symposium for Immunomodulation in Cancer and Regeneration, Portugal' },
+  { year: '2017', text: 'Melhor apresentação em poster, SICR 2017 - Symposium for Immunomodulation in Cancer and Regeneration, Portugal' },
+  { year: '2016', text: 'Bolsa de Doutoramento, Programa Graduado em Áreas da Biologia Básica e Aplicada, GABBA - Fundação para a Ciência e a Tecnologia, Portugal' },
+  { year: '2014', text: 'Estágio Inov Contacto, AICEP - Agência para o Investimento e Comércio Externo de Portugal' }
+];
+---
+
+<BaseLayout title="A Prima nos Media">
+  <div id="main-sections">
+    <div class="page-section">
+      <div class="section-content">
+        <h1 class="section-title">A Prima nos Media</h1>
+        <p class="section-intro">Acompanha as aparições da Prima nos media portugueses, desde podcasts a artigos, na missão de levar ciência a todos.</p>
+      </div>
+    </div>
+
+    <div class="page-section grey-section">
+      <div class="section-content">
+        <h2 class="subsection-title">Podcasts & Rádio</h2>
+        <div class="media-grid">
+          {podcasts.map((item) => (
+            <MediaCard
+              year={item.year}
+              outlet={item.outlet}
+              description={item.description}
+              link={item.link}
+              linkText={item.linkText}
+              linkIcon={item.linkIcon}
+              thumbnail={item.thumbnail}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="section-content">
+        <h2 class="subsection-title">Artigos & Imprensa</h2>
+        <div class="media-grid">
+          {articles.map((item) => (
+            <MediaCard
+              year={item.year}
+              outlet={item.outlet}
+              description={item.description}
+              link={item.link}
+              linkText={item.linkText}
+              thumbnail={item.thumbnail}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section grey-section">
+      <div class="section-content">
+        <h2 class="subsection-title">TV & Vídeo</h2>
+        <div class="media-grid">
+          {tvVideos.map((item) => (
+            <MediaCard
+              year={item.year}
+              outlet={item.outlet}
+              description={item.description}
+              link={item.link}
+              linkText={item.linkText}
+              linkIcon={item.linkIcon}
+              thumbnail={item.thumbnail}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="section-content">
+        <h2 class="subsection-title">Artigos Científicos</h2>
+        <div class="publications-list">
+          {publications.map((pub) => (
+            <div class="publication-item">
+              <span class="publication-year">{pub.year}</span>
+              <span class="publication-text">{pub.text}</span>
+              <a href={pub.doi} class="publication-link" target="_blank" rel="noopener">DOI</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section grey-section">
+      <div class="section-content">
+        <h2 class="subsection-title">Prémios e Distinções</h2>
+        <div class="awards-list">
+          {awards.map((award) => (
+            <div class="award-item">
+              <span class="award-year">{award.year}</span>
+              <span class="award-text">{award.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

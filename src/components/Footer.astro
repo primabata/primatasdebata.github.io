@@ -1,0 +1,11 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import { siteConfig } from '../data/site';
+---
+
+<footer>
+  <SocialLinks />
+  <p class="footer-copyright">
+    &copy; {new Date().getFullYear()} {siteConfig.title}. Todos os direitos reservados.
+  </p>
+</footer>

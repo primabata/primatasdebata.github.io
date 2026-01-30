@@ -1,0 +1,13 @@
+---
+interface Props {
+  name: string;
+  description: string;
+}
+
+const { name, description } = Astro.props;
+---
+
+<div class="value-item fade-in-stagger">
+  <h3 class="value-name">{name}</h3>
+  <p class="value-description">{description}</p>
+</div>

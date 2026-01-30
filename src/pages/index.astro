@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ValueCard from '../components/ValueCard.astro';
+
+const values = [
+  { name: 'Saúde', description: 'Prevenir a doença através de boas práticas, desporto, alimentação e vida ativa' },
+  { name: 'Humor', description: 'O riso é a maior inspiração e mostra que somos todos iguais' },
+  { name: 'Integridade', description: 'Respeito pelos direitos humanos e ciência baseada na evidência' },
+  { name: 'Pensamento crítico', description: 'Ferramentas de empoderamento para melhorar a sociedade através do conhecimento' },
+  { name: 'Encantamento', description: 'Manter a curiosidade de criança para descobrir a magia do dia-a-dia' }
+];
+---
+
+<BaseLayout>
+  <div id="header">
+    <div id="header-inner">
+      <h1 id="title">Prima tás de bata</h1>
+      <h2 id="subtitle">Ciência para todos!</h2>
+      <h4 id="sub-subtitle">A cientista lá do bairro na luta contra a desinformação científica em Portugal.</h4>
+      <h4>Uma comunidade de 4000+ pessoas curiosas e informadas</h4>
+
+      <div class="cta-buttons">
+        <a href="https://instagram.com/primatasdebata" class="actionbtn actionbtn-secondary" target="_blank" rel="noopener">
+          <span class="fab fa-instagram" aria-hidden="true"></span>
+          Seguir no Instagram
+        </a>
+        <a href="/contact" class="actionbtn actionbtn-secondary">
+          <span class="far fa-envelope" aria-hidden="true"></span>
+          Contacte-nos
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-sections">
+    <div id="aboutus-out" class="page-section grey-section">
+      <div id="aboutus">
+        <div class="section-title fade-in">Sobre a prima Joana</div>
+
+        <div id="aboutus-content">
+          <div id="aboutus-photo">
+            <img src="/images/joana-profile.jpg" alt="Joana - Prima Tás de Bata" class="profile-photo" />
+          </div>
+
+          <div id="aboutus-text">
+            <p class="aboutus-intro">A curiosidade desde sempre</p>
+
+            <p><strong>A PRIMA, TÁS DE BATA</strong> cresceu a fazer experiências em casa, na escola e no jardim. A Joana fazia questão de perguntar o porquê das coisas, e ao crescer tornou-se cientista.</p>
+
+            <p>Depois de ser investigadora durante muitos anos e de conseguir o seu doutoramento, percebeu que o maior impacto é <strong>trocar a ciência por miúdos</strong>. A Prima acredita que, se as pessoas tiverem confiança nos cientistas, poderão descobrir que a ciência pode resolver muitos problemas e encantar-nos ao mesmo tempo.</p>
+
+            <p class="aboutus-cta">Junta-te à <strong>brigada anti-desinformação</strong>, por um mundo com mais ciência!</p>
+          </div>
+        </div>
+
+        <a href="/about" class="actionbtn actionbtn-secondary" style="margin-bottom: 2rem;">
+          Sobre a Prima
+        </a>
+      </div>
+    </div>
+
+    <div id="values-out" class="page-section">
+      <div id="values">
+        <div class="section-title fade-in">Os nossos valores</div>
+        <div class="values-grid">
+          {values.map((value) => (
+            <ValueCard name={value.name} description={value.description} />
+          ))}
+        </div>
+        <a href="/contact" class="actionbtn actionbtn-secondary">
+          Trabalhe Connosco
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
