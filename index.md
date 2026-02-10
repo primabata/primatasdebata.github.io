@@ -18,7 +18,7 @@ js:
 ## Ciência para todos! {#subtitle}
 
 #### A cientista lá do bairro na luta contra a desinformação científica em Portugal.
-#### Uma comunidade de 4000+ pessoas curiosas e informadas
+#### Uma comunidade de 5000+ pessoas curiosas e informadas
 
 <div class="cta-buttons">
   <a href="https://instagram.com/primatasdebata" class="actionbtn actionbtn-secondary" target="_blank" rel="noopener">
