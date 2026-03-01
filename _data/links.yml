@@ -1,0 +1,55 @@
+# Bio Link Page Configuration
+# Easy to update - just edit this file to add/remove/reorder links
+
+# Profile section
+profile:
+  name: "Prima tás de bata"
+  tagline: "Ciência e comunicação"
+  image: "/assets/img/logo2.png"
+
+# Main links - will be displayed as buttons
+links:
+  - title: "Sobre a Prima Joana"
+    url: "/about"
+    icon: "fas fa-user"
+    description: "Conhece a história por trás do projeto"
+    category: "about"
+
+  - title: "Newsletter"
+    url: "https://primatasdebata.substack.com"
+    icon: "fas fa-envelope"
+    description: "Subscreve para receberes novidades"
+    category: "newsletter"
+    external: true
+
+  - title: "Workshops e Formações"
+    url: "/contact"
+    icon: "fas fa-chalkboard-teacher"
+    description: "Marca uma sessão para a tua escola ou empresa"
+    category: "workshop"
+
+  - title: "Colaborações"
+    url: "/contact"
+    icon: "fas fa-handshake"
+    description: "Parcerias e projetos conjuntos"
+    category: "collaboration"
+
+# Social media links
+social:
+  - platform: "Instagram"
+    url: "https://instagram.com/primatasdebata"
+    icon: "fab fa-instagram"
+
+  - platform: "LinkedIn"
+    url: "https://linkedin.com/in/joanawilton"
+    icon: "fab fa-linkedin"
+
+  - platform: "Email"
+    url: "mailto:primatasdebata@gmail.com"
+    icon: "fas fa-envelope"
+
+# UTM parameters for tracking
+utm:
+  source: "instagram"
+  medium: "bio_link"
+  campaign: "social_traffic"
