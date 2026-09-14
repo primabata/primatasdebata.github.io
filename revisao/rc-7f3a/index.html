@@ -118,10 +118,14 @@ sitemap: false
     background:var(--panel);
     border:1px solid var(--hair);
     border-radius:4px;
-    cursor:pointer;
+    cursor:grab;
     margin-bottom:0.4rem;
-    overflow:hidden;
+    margin-top:1rem;
+    overflow:visible;
+    touch-action:none;
+    user-select:none;
   }
+  #timeline.scrubbing{cursor:grabbing}
   .seg-block{
     position:relative;
     background:#333;
@@ -130,12 +134,22 @@ sitemap: false
     color:var(--muted);
     font-size:0.75rem;
     min-width:2px;
+    overflow:hidden;
+    border-radius:4px 4px 0 0;
   }
-  .seg-block:last-child{border-right:none}
+  .seg-block:first-child{border-radius:4px 0 0 4px}
+  .seg-block:last-child{border-right:none;border-radius:0 4px 4px 0}
   .seg-block.active{background:#4a3d1f;color:var(--accent)}
   #playhead{
-    position:absolute;top:0;bottom:0;width:2px;background:var(--accent);
+    position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--accent);
     pointer-events:none;
+  }
+  #playhead::before{
+    content:'';
+    position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+    width:12px;height:12px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px rgba(0,0,0,0.35);
   }
   @media (prefers-reduced-motion:no-preference){
     #playhead{transition:left 60ms linear}
@@ -439,14 +453,62 @@ sitemap: false
     Array.from(timelineEl.querySelectorAll('.seg-block')).forEach(function(el){
       el.classList.toggle('active', Number(el.dataset.index) === curSeg);
     });
+    timelineEl.setAttribute('aria-valuemin', '0');
+    timelineEl.setAttribute('aria-valuemax', String(Math.round(TOTAL)));
+    timelineEl.setAttribute('aria-valuenow', String(Math.round(curEditTime)));
+    timelineEl.setAttribute('aria-valuetext', formatDisplay(curEditTime) + ' / ' + formatDisplay(TOTAL));
   }
 
-  timelineEl.addEventListener('click', function(e){
-    if(!SEGS.length) return;
+  let scrubbing = false, wasPlayingBeforeScrub = false, lastScrubSeek = 0;
+
+  function fracFromPointer(e){
     const rect = timelineEl.getBoundingClientRect();
-    const frac = Math.min(1, Math.max(0, (e.clientX-rect.left)/rect.width));
-    seekToEditTime(frac*TOTAL);
+    return Math.min(1, Math.max(0, (e.clientX-rect.left)/rect.width));
+  }
+
+  function scrubMove(e, force){
+    const t = fracFromPointer(e) * TOTAL;
+    curEditTime = t;
+    updateTimelinePlayhead();
+    const now = (window.performance && performance.now) ? performance.now() : Date.now();
+    if(force || now - lastScrubSeek > 80){
+      lastScrubSeek = now;
+      scrubToEditTime(t);
+    }
+  }
+
+  timelineEl.addEventListener('pointerdown', function(e){
+    if(!SEGS.length || !clickOverlay.hidden) return;
+    scrubbing = true;
+    wasPlayingBeforeScrub = playing;
+    if(playing){
+      try{ players[activeIdx].pauseVideo(); }catch(err){}
+      playing = false;
+    }
+    timelineEl.classList.add('scrubbing');
+    try{ timelineEl.setPointerCapture(e.pointerId); }catch(err){}
+    scrubMove(e, true);
   });
+
+  timelineEl.addEventListener('pointermove', function(e){
+    if(!scrubbing) return;
+    scrubMove(e, false);
+  });
+
+  function endScrub(e){
+    if(!scrubbing) return;
+    scrubbing = false;
+    timelineEl.classList.remove('scrubbing');
+    try{ timelineEl.releasePointerCapture(e.pointerId); }catch(err){}
+    scrubMove(e, true);
+    if(wasPlayingBeforeScrub){
+      try{ players[activeIdx].playVideo(); }catch(err){}
+      playing = true;
+      hideEndOverlay();
+    }
+  }
+  timelineEl.addEventListener('pointerup', endScrub);
+  timelineEl.addEventListener('pointercancel', endScrub);
 
   // ---------- EDL ----------
   function renderEDL(){
@@ -572,6 +634,34 @@ sitemap: false
     } else {
       playFrom(idx, offset);
     }
+  }
+
+  // Like seekToEditTime, but never resumes playback — used while dragging
+  // the slider, so scrubbing across a segment boundary doesn't kick the
+  // video into motion until the pointer is released.
+  function scrubToEditTime(t){
+    if(!SEGS.length) return;
+    t = Math.min(TOTAL - 0.05, Math.max(0, t));
+    let idx = SEGS.length-1;
+    for(let i=0;i<SEGS.length;i++){
+      if(t < SEGS[i].at + SEGS[i].len){ idx = i; break; }
+    }
+    const offset = t - SEGS[idx].at;
+    if(idx !== curSeg){
+      curSeg = idx;
+      clearTimeout(prebufferTimer);
+      if(idx+1 < SEGS.length){
+        prebufferTimer = setTimeout(function(){ prebuffer(1-activeIdx, idx+1); }, 400);
+      }
+    }
+    try{
+      const p = players[activeIdx];
+      p.seekTo(SEGS[idx].start + offset, true);
+      p.pauseVideo();
+    }catch(e){}
+    curEditTime = t;
+    updateReadouts(SEGS[idx].start + offset);
+    updateTimelinePlayhead();
   }
 
   function togglePlay(){
