@@ -1,0 +1,828 @@
+---
+layout: null
+sitemap: false
+---
+{% raw %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Revisão de corte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#2b2b2b;
+    --panel:#1f1f1f;
+    --hair:#3d3d3d;
+    --text:#ececec;
+    --muted:#9b9b9b;
+    --band:#6e6e6e;
+    --accent:#f0b429;
+    --danger:#c8503f;
+    --font-ui:'Barlow Semi Condensed', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    --font-mono:'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-ui);
+    line-height:1.4;
+  }
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;letter-spacing:0.01em}
+  button{
+    font-family:var(--font-ui);
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--hair);
+    border-radius:4px;
+    padding:0.45em 0.8em;
+    font-size:0.95rem;
+    cursor:pointer;
+  }
+  button:hover{border-color:var(--accent)}
+  button:disabled{opacity:0.4;cursor:default}
+  button:disabled:hover{border-color:var(--hair)}
+  input[type="text"],textarea{
+    font-family:var(--font-ui);
+    background:var(--panel);
+    color:var(--text);
+    border:1px solid var(--hair);
+    border-radius:4px;
+    padding:0.5em 0.6em;
+    width:100%;
+  }
+  textarea{font-family:var(--font-mono);resize:vertical;min-height:6em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  #app{max-width:960px;margin:0 auto;padding:1.25rem 1rem 3rem}
+
+  #pageHeader{padding:0.25rem 0 1rem;border-bottom:1px solid var(--hair);margin-bottom:1rem}
+  #pageHeader h1{font-size:1.1rem;font-weight:600;margin:0;color:var(--muted)}
+  #pageHeader h1 span{color:var(--text)}
+
+  #viewerWrap{background:var(--band);border-radius:6px;padding:2.5vw;margin-bottom:0.75rem}
+  #playerStack{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .layer{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 120ms linear}
+  .layer.front{opacity:1;pointer-events:auto}
+  .layer iframe{width:100%;height:100%;border:0;display:block}
+
+  .overlay{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;
+    background:rgba(0,0,0,0.55);
+    color:var(--text);
+    text-align:center;
+    padding:1.5rem;
+    z-index:5;
+  }
+  .overlay[hidden]{display:none}
+  .overlay.error{background:rgba(20,10,8,0.85);color:#ffd9cf}
+  .overlay.error p{max-width:32em;margin:0}
+  #playOverlayBtn{
+    width:3.2rem;height:3.2rem;border-radius:50%;
+    border:2px solid var(--accent);color:var(--accent);
+    font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,0.3);
+  }
+  #noVideoNotice{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:var(--muted);text-align:center;padding:1.5rem;
+  }
+  #noVideoNotice[hidden]{display:none}
+
+  #transport{
+    display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;
+    padding:0.6rem 0;
+  }
+  #transport .spacer{flex:1 1 auto}
+  #readouts{display:flex;flex-direction:column;gap:0.1rem;font-size:0.85rem}
+  #readouts .muted{color:var(--muted)}
+
+  #timeline{
+    position:relative;
+    display:flex;
+    height:2.4rem;
+    background:var(--panel);
+    border:1px solid var(--hair);
+    border-radius:4px;
+    cursor:pointer;
+    margin-bottom:0.4rem;
+    overflow:hidden;
+  }
+  .seg-block{
+    position:relative;
+    background:#333;
+    border-right:3px solid var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);
+    font-size:0.75rem;
+    min-width:2px;
+  }
+  .seg-block:last-child{border-right:none}
+  .seg-block.active{background:#4a3d1f;color:var(--accent)}
+  #playhead{
+    position:absolute;top:0;bottom:0;width:2px;background:var(--accent);
+    pointer-events:none;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    #playhead{transition:left 60ms linear}
+  }
+
+  #notice{min-height:1.2em;font-size:0.8rem;color:var(--accent);margin-bottom:0.5rem}
+
+  details#setup{
+    background:var(--panel);
+    border:1px solid var(--hair);
+    border-radius:6px;
+    padding:0.75rem 1rem 1rem;
+    margin-top:1rem;
+  }
+  details#setup summary{cursor:pointer;color:var(--muted);font-weight:600;padding:0.25rem 0}
+  .field{margin:0.75rem 0}
+  .field label{display:block;font-size:0.8rem;color:var(--muted);margin-bottom:0.3rem}
+  .setup-actions{display:flex;gap:0.6rem;flex-wrap:wrap;margin:0.9rem 0}
+  #setupError{color:var(--danger);font-size:0.85rem;white-space:pre-line;margin:0.5rem 0}
+  #setupError:empty{display:none}
+  .lockRow{display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:var(--muted)}
+
+  table#edlTable{width:100%;border-collapse:collapse;margin-top:0.75rem;font-size:0.85rem}
+  table#edlTable caption{text-align:left;color:var(--muted);margin-bottom:0.4rem;font-size:0.8rem}
+  table#edlTable th,table#edlTable td{
+    text-align:left;padding:0.35em 0.5em;border-bottom:1px solid var(--hair);
+  }
+  table#edlTable th{color:var(--muted);font-weight:600}
+
+  @media (max-width:480px){
+    #app{padding:0.75rem 0.5rem 2rem}
+    #viewerWrap{border-radius:0;padding:0;margin-left:-0.5rem;margin-right:-0.5rem;width:calc(100% + 1rem)}
+    #playerStack{border-radius:0}
+    #transport{gap:0.4rem}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header id="pageHeader"><h1>Revisão de corte<span id="titleSuffix"></span></h1></header>
+
+  <div id="viewerWrap">
+    <div id="playerStack">
+      <div class="layer front" id="layerA"><div id="playerA"></div></div>
+      <div class="layer" id="layerB"><div id="playerB"></div></div>
+      <div id="noVideoNotice">Configura um corte abaixo para começar.</div>
+      <div id="clickOverlay" class="overlay" hidden>
+        <button id="playOverlayBtn" type="button" aria-label="Reproduzir">&#9654;</button>
+        <div id="overlayTitle" class="muted"></div>
+      </div>
+      <div id="errorOverlay" class="overlay error" hidden>
+        <p id="errorMsg"></p>
+      </div>
+      <div id="endOverlay" class="overlay" hidden>
+        <p>Fim do corte.</p>
+        <button id="replayBtn" type="button">Repetir</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="notice" aria-live="polite"></div>
+
+  <div id="timeline" role="slider" aria-label="Linha do tempo do corte" tabindex="0">
+    <div id="playhead"></div>
+  </div>
+
+  <div id="transport">
+    <button id="prevBtn" type="button" title="Segmento anterior ([)" aria-label="Segmento anterior">&#9198;</button>
+    <button id="playBtn" type="button" title="Reproduzir/Pausar (espaço)" aria-label="Reproduzir/Pausar">&#9654;</button>
+    <button id="nextBtn" type="button" title="Segmento seguinte (])" aria-label="Segmento seguinte">&#9197;</button>
+    <button id="muteBtn" type="button" title="Silenciar" aria-label="Silenciar">&#128266;</button>
+    <div id="readouts">
+      <span class="mono" id="editReadout">0:00 / 0:00</span>
+      <span class="mono muted" id="sourceReadout">Seg 0/0 &middot; 0:00</span>
+    </div>
+    <span class="spacer"></span>
+    <button id="notesBtn" type="button">Copiar nota de timecode</button>
+  </div>
+
+  <details id="setup">
+    <summary>Configuração do corte</summary>
+
+    <div class="field">
+      <label for="videoInput">URL do YouTube ou ID</label>
+      <input type="text" id="videoInput" placeholder="https://youtu.be/VIDEOID ou VIDEOID">
+    </div>
+
+    <div class="field">
+      <label for="rangesInput">Intervalos (um por linha, entrada-saída)</label>
+      <textarea id="rangesInput" rows="5" placeholder="0:10-0:48
+1:10-1:57
+2:32-3:17"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="titleInput">Título (opcional, visível para o cliente)</label>
+      <input type="text" id="titleInput" placeholder="Ex.: Vídeo institucional — corte 3">
+    </div>
+
+    <div class="field lockRow">
+      <input type="checkbox" id="lockInput">
+      <label for="lockInput" style="margin:0">Bloquear (esconde este painel no link partilhado)</label>
+    </div>
+
+    <div id="setupError" role="alert"></div>
+
+    <div class="setup-actions">
+      <button id="buildBtn" type="button">Construir corte</button>
+      <button id="copyBtn" type="button">Copiar link para o cliente</button>
+    </div>
+
+    <table id="edlTable">
+      <caption>EDL — lista de decisão de edição</caption>
+      <thead>
+        <tr><th>#</th><th>Entrada (fonte)</th><th>Saída (fonte)</th><th>Duração</th><th>Posição no corte</th></tr>
+      </thead>
+      <tbody id="edlBody"></tbody>
+    </table>
+  </details>
+
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+(function(){
+  "use strict";
+
+  // ---------- timecode parsing ----------
+  function parseTC(raw){
+    let s = String(raw).trim().replace(/\s+/g,'');
+    if(!s) return NaN;
+    let frac = 0;
+    if(s.includes(':')){
+      const m = s.match(/\.(\d+)$/);
+      if(m){ frac = parseFloat('0.'+m[1]); s = s.slice(0,m.index); }
+    } else if(s.includes('.')){
+      s = s.replace(/\./g,':');
+    } else {
+      const n = Number(s); return isFinite(n) ? n : NaN;
+    }
+    const parts = s.split(':').map(Number);
+    if(parts.some(p=>!isFinite(p))) return NaN;
+    return parts.reduce((acc,p)=>acc*60+p, 0) + frac;
+  }
+
+  function formatDisplay(sec){
+    sec = Math.max(0, Math.floor(sec || 0));
+    const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+    const ss = String(s).padStart(2,'0');
+    return h>0 ? (h+':'+String(m).padStart(2,'0')+':'+ss) : (m+':'+ss);
+  }
+
+  function extractVideoId(raw){
+    if(!raw) return null;
+    const s = String(raw).trim();
+    const m = s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/);
+    if(m) return m[1];
+    if(/^[A-Za-z0-9_-]{11}$/.test(s)) return s;
+    return null;
+  }
+
+  function parseTokens(tokens){
+    const segs=[], errors=[];
+    tokens.forEach(function(tok){
+      const raw = tok.raw, lineNo = tok.lineNo;
+      const parts = raw.split(/\s*(?:-|–|—|\bto\b)\s*/i);
+      if(parts.length !== 2){
+        errors.push('Linha '+lineNo+': não consegui separar início e fim em "'+raw+'".');
+        return;
+      }
+      const inRaw = parts[0].trim(), outRaw = parts[1].trim();
+      const start = parseTC(inRaw), end = parseTC(outRaw);
+      if(!isFinite(start) || !isFinite(end)){
+        errors.push('Linha '+lineNo+': não consegui perceber o timecode em "'+raw+'".');
+        return;
+      }
+      if(end <= start){
+        errors.push('Linha '+lineNo+': o fim ('+outRaw+') tem de vir depois do início ('+inRaw+').');
+        return;
+      }
+      segs.push({start:start, end:end, inRaw:inRaw, outRaw:outRaw});
+    });
+    return {segs:segs, errors:errors};
+  }
+
+  function parseRangesTextarea(text){
+    const rawLines = String(text||'').split('\n');
+    const tokens = [];
+    rawLines.forEach(function(line,i){
+      const t = line.trim();
+      if(!t || t.charAt(0)==='#') return;
+      tokens.push({raw:t, lineNo:i+1});
+    });
+    return parseTokens(tokens);
+  }
+
+  function parseRangesHashC(c){
+    const parts = String(c||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+    const tokens = parts.map(function(t,i){ return {raw:t, lineNo:i+1}; });
+    return parseTokens(tokens);
+  }
+
+  function finalizeSegs(segs){
+    let at = 0;
+    const out = segs.map(function(s){
+      const len = s.end - s.start;
+      const withAt = {start:s.start, end:s.end, inRaw:s.inRaw, outRaw:s.outRaw, len:len, at:at};
+      at += len;
+      return withAt;
+    });
+    return {segs: out, total: at};
+  }
+
+  // ---------- state ----------
+  let VIDEO_ID = null, TITLE = '', LOCKED = false;
+  let SEGS = [], TOTAL = 0;
+  let players = [null,null], readyCount = 0, apiReady = false, pendingCreate = false;
+  let activeIdx = 0, curSeg = 0, curEditTime = 0;
+  let playing = false, muted = false;
+  let pollTimer = null, prebufferTimer = null;
+
+  const PLAYER_VARS = {controls:0, disablekb:1, rel:0, modestbranding:1, playsinline:1, fs:0, iv_load_policy:3};
+
+  // ---------- DOM refs ----------
+  const $ = function(id){ return document.getElementById(id); };
+  const layerEls = [$('layerA'), $('layerB')];
+  const clickOverlay = $('clickOverlay'), overlayTitle = $('overlayTitle');
+  const errorOverlay = $('errorOverlay'), errorMsg = $('errorMsg');
+  const endOverlay = $('endOverlay'), replayBtn = $('replayBtn');
+  const noVideoNotice = $('noVideoNotice');
+  const timelineEl = $('timeline'), playheadEl = $('playhead');
+  const editReadoutEl = $('editReadout'), sourceReadoutEl = $('sourceReadout');
+  const playBtn = $('playBtn'), prevBtn = $('prevBtn'), nextBtn = $('nextBtn'), muteBtn = $('muteBtn');
+  const notesBtn = $('notesBtn'), noticeEl = $('notice');
+  const setupEl = $('setup'), videoInputEl = $('videoInput'), rangesInputEl = $('rangesInput');
+  const titleInputEl = $('titleInput'), lockInputEl = $('lockInput'), setupErrorEl = $('setupError');
+  const buildBtn = $('buildBtn'), copyBtn = $('copyBtn');
+  const edlBody = $('edlBody'), titleSuffix = $('titleSuffix');
+
+  // ---------- helpers ----------
+  function flashNotice(msg){
+    noticeEl.textContent = msg;
+    clearTimeout(flashNotice._t);
+    flashNotice._t = setTimeout(function(){ noticeEl.textContent = ''; }, 4000);
+  }
+
+  function showSetupError(msg){ setupErrorEl.textContent = msg; }
+  function clearSetupError(){ setupErrorEl.textContent = ''; }
+
+  async function copyText(str){
+    try{
+      await navigator.clipboard.writeText(str);
+      return true;
+    }catch(e){
+      try{ window.prompt('Copia este texto:', str); }catch(e2){}
+      return false;
+    }
+  }
+
+  function applyTitle(){
+    document.title = TITLE ? ('Revisão — ' + TITLE) : 'Revisão de corte';
+    titleSuffix.textContent = TITLE ? (' — ' + TITLE) : '';
+    overlayTitle.textContent = TITLE || '';
+  }
+
+  function writeHash(){
+    const p = new URLSearchParams();
+    p.set('v', VIDEO_ID);
+    p.set('c', SEGS.map(function(s){ return s.inRaw+'-'+s.outRaw; }).join(','));
+    if(TITLE) p.set('t', TITLE);
+    if(LOCKED) p.set('lock','1');
+    history.replaceState(null, '', '#'+p.toString());
+  }
+
+  function parseHash(){
+    let raw = location.hash || '';
+    if(raw.charAt(0)==='#') raw = raw.slice(1);
+    const p = new URLSearchParams(raw);
+    return { v:p.get('v'), c:p.get('c'), t:p.get('t')||'', lock:p.get('lock')==='1' };
+  }
+
+  // ---------- timeline ----------
+  function buildTimelineDOM(){
+    Array.from(timelineEl.querySelectorAll('.seg-block')).forEach(function(el){ el.remove(); });
+    SEGS.forEach(function(seg,i){
+      const div = document.createElement('div');
+      div.className = 'seg-block';
+      div.style.flex = seg.len + ' 0 0';
+      div.dataset.index = i;
+      div.title = 'Segmento '+(i+1)+': '+seg.inRaw+' – '+seg.outRaw;
+      div.textContent = String(i+1);
+      timelineEl.appendChild(div);
+    });
+    updateTimelinePlayhead();
+  }
+
+  function updateTimelinePlayhead(){
+    const pct = TOTAL>0 ? Math.min(100, Math.max(0, (curEditTime/TOTAL)*100)) : 0;
+    playheadEl.style.left = pct+'%';
+    Array.from(timelineEl.querySelectorAll('.seg-block')).forEach(function(el){
+      el.classList.toggle('active', Number(el.dataset.index) === curSeg);
+    });
+  }
+
+  timelineEl.addEventListener('click', function(e){
+    if(!SEGS.length) return;
+    const rect = timelineEl.getBoundingClientRect();
+    const frac = Math.min(1, Math.max(0, (e.clientX-rect.left)/rect.width));
+    seekToEditTime(frac*TOTAL);
+  });
+
+  // ---------- EDL ----------
+  function renderEDL(){
+    edlBody.textContent = '';
+    SEGS.forEach(function(seg,i){
+      const tr = document.createElement('tr');
+      [String(i+1), seg.inRaw, seg.outRaw, formatDisplay(seg.len), formatDisplay(seg.at)].forEach(function(val, ci){
+        const td = document.createElement('td');
+        td.textContent = val;
+        if(ci>0) td.className='mono';
+        tr.appendChild(td);
+      });
+      edlBody.appendChild(tr);
+    });
+  }
+
+  // ---------- readouts ----------
+  function updateReadouts(sourceT){
+    editReadoutEl.textContent = formatDisplay(curEditTime) + ' / ' + formatDisplay(TOTAL);
+    sourceReadoutEl.textContent = 'Seg ' + (SEGS.length ? (curSeg+1) : 0) + '/' + SEGS.length + ' · ' + formatDisplay(sourceT);
+  }
+
+  // ---------- overlays ----------
+  function showClickOverlay(){ clickOverlay.hidden = false; }
+  function hideClickOverlay(){ clickOverlay.hidden = true; }
+  function showErrorOverlay(msg){ errorMsg.textContent = msg; errorOverlay.hidden = false; hideClickOverlay(); hideEndOverlay(); }
+  function hideErrorOverlay(){ errorOverlay.hidden = true; }
+  function showEndOverlay(){ endOverlay.hidden = false; }
+  function hideEndOverlay(){ endOverlay.hidden = true; }
+
+  const EMBED_ERROR_MSG = "Este vídeo não pode ser incorporado. Define-o como Não listado (não Privado) e permite a incorporação.";
+
+  // ---------- player engine ----------
+  function prebuffer(idx, segIndex){
+    const s = SEGS[segIndex];
+    if(!s || !players[idx]) return;
+    try{
+      players[idx].mute();
+      players[idx].seekTo(s.start, true);
+      players[idx].playVideo();
+      setTimeout(function(){
+        try{ players[idx].pauseVideo(); players[idx].seekTo(s.start, true); }catch(e){}
+      }, 450);
+    }catch(e){}
+  }
+
+  function doSwap(nextIdx, idleIdx){
+    const idle = players[idleIdx], outgoing = players[activeIdx];
+    try{ if(!muted) idle.unMute(); idle.playVideo(); }catch(e){}
+    try{ outgoing.pauseVideo(); outgoing.mute(); }catch(e){}
+    layerEls[activeIdx].classList.remove('front');
+    layerEls[idleIdx].classList.add('front');
+    activeIdx = idleIdx;
+    curSeg = nextIdx;
+    playing = true;
+    hideEndOverlay();
+    clearTimeout(prebufferTimer);
+    if(curSeg+1 < SEGS.length){
+      prebufferTimer = setTimeout(function(){ prebuffer(1-activeIdx, curSeg+1); }, 900);
+    }
+  }
+
+  function playFrom(segIndex, offsetSec){
+    curSeg = segIndex;
+    const p = players[activeIdx];
+    try{
+      p.seekTo(SEGS[segIndex].start + offsetSec, true);
+      if(muted) p.mute(); else p.unMute();
+      p.playVideo();
+    }catch(e){}
+    playing = true;
+    hideEndOverlay();
+    clearTimeout(prebufferTimer);
+    if(segIndex+1 < SEGS.length){
+      prebufferTimer = setTimeout(function(){ prebuffer(1-activeIdx, segIndex+1); }, 400);
+    }
+    try{
+      const t = SEGS[segIndex].start + offsetSec;
+      curEditTime = SEGS[segIndex].at + offsetSec;
+      updateReadouts(t);
+      updateTimelinePlayhead();
+    }catch(e){}
+  }
+
+  function trySwapOrSeek(nextIdx){
+    const idleIdx = 1-activeIdx, idle = players[idleIdx];
+    let idleT = null;
+    try{ idleT = idle.getCurrentTime(); }catch(e){}
+    if(idleT!=null && Math.abs(idleT - SEGS[nextIdx].start) < 1.2){
+      doSwap(nextIdx, idleIdx);
+    } else {
+      playFrom(nextIdx, 0);
+    }
+  }
+
+  function endOfCut(){
+    try{ players[activeIdx].pauseVideo(); }catch(e){}
+    playing = false;
+    showEndOverlay();
+  }
+
+  function crossBoundary(){
+    if(curSeg >= SEGS.length-1){ endOfCut(); }
+    else { trySwapOrSeek(curSeg+1); }
+  }
+
+  function seekToEditTime(t){
+    if(!SEGS.length) return;
+    t = Math.min(TOTAL - 0.05, Math.max(0, t));
+    let idx = SEGS.length-1;
+    for(let i=0;i<SEGS.length;i++){
+      if(t < SEGS[i].at + SEGS[i].len){ idx = i; break; }
+    }
+    const offset = t - SEGS[idx].at;
+    if(idx === curSeg){
+      try{
+        const p = players[activeIdx];
+        p.seekTo(SEGS[idx].start + offset, true);
+        curEditTime = t;
+        updateReadouts(SEGS[idx].start+offset);
+        updateTimelinePlayhead();
+      }catch(e){}
+    } else {
+      playFrom(idx, offset);
+    }
+  }
+
+  function togglePlay(){
+    if(!SEGS.length || !players[activeIdx]) return;
+    if(!clickOverlay.hidden){ startPlayback(); return; }
+    if(playing){
+      try{ players[activeIdx].pauseVideo(); }catch(e){}
+      playing = false;
+    } else {
+      try{ players[activeIdx].playVideo(); }catch(e){}
+      playing = true;
+      hideEndOverlay();
+    }
+  }
+
+  function goPrev(){
+    if(!SEGS.length) return;
+    if(!clickOverlay.hidden){ startPlayback(); return; }
+    const target = Math.max(0, curSeg-1);
+    playFrom(target, 0);
+  }
+
+  function goNext(){
+    if(!SEGS.length) return;
+    if(!clickOverlay.hidden){ startPlayback(); return; }
+    crossBoundary();
+  }
+
+  function seekRelative(delta){
+    if(!SEGS.length) return;
+    if(!clickOverlay.hidden) return;
+    seekToEditTime(curEditTime + delta);
+  }
+
+  function startPlayback(){
+    hideClickOverlay();
+    playFrom(0, 0);
+  }
+
+  // ---------- YouTube API ----------
+  function tryCreatePlayersWhenReady(){
+    if(apiReady) createPlayers();
+    else pendingCreate = true;
+  }
+
+  window.onYouTubeIframeAPIReady = function(){
+    apiReady = true;
+    if(pendingCreate){ pendingCreate = false; createPlayers(); }
+  };
+
+  function onPlayerReady(e){
+    try{ e.target.mute(); }catch(err){}
+    readyCount++;
+    if(readyCount===2) afterBothReady();
+  }
+
+  function onPlayerStateChange(e){
+    if(e.data === 0 /* ENDED */ && e.target === players[activeIdx] && playing){
+      crossBoundary();
+    }
+  }
+
+  function onPlayerError(){
+    showErrorOverlay(EMBED_ERROR_MSG);
+  }
+
+  function afterBothReady(){
+    try{ players[0].seekTo(SEGS[0].start, true); players[0].pauseVideo(); }catch(e){}
+    if(SEGS.length>1) prebuffer(1, 1);
+    curSeg = 0; activeIdx = 0; curEditTime = 0; playing = false;
+    updateReadouts(SEGS[0].start);
+    updateTimelinePlayhead();
+    hideErrorOverlay();
+    noVideoNotice.hidden = true;
+    overlayTitle.textContent = TITLE || '';
+    showClickOverlay();
+    if(!pollTimer) pollTimer = setInterval(pollTick, 60);
+  }
+
+  function pollTick(){
+    updateTimelinePlayhead();
+    if(!playing || !SEGS.length) return;
+    const p = players[activeIdx];
+    let t;
+    try{ t = p.getCurrentTime(); }catch(e){ return; }
+    if(typeof t !== 'number' || isNaN(t)) return;
+    const seg = SEGS[curSeg];
+    curEditTime = seg.at + Math.max(0, t - seg.start);
+    updateReadouts(t);
+    updateTimelinePlayhead();
+    if(t >= seg.end - 0.06){
+      crossBoundary();
+    }
+  }
+
+  function resetPlayerDivs(){
+    layerEls[0].innerHTML = '<div id="playerA"></div>';
+    layerEls[1].innerHTML = '<div id="playerB"></div>';
+  }
+
+  function createPlayers(){
+    readyCount = 0; activeIdx = 0; curSeg = 0; playing = false;
+    hideErrorOverlay(); hideEndOverlay(); hideClickOverlay();
+    resetPlayerDivs();
+    players[0] = new YT.Player('playerA', {
+      videoId: VIDEO_ID, width:'100%', height:'100%',
+      playerVars: PLAYER_VARS,
+      events:{ onReady:onPlayerReady, onStateChange:onPlayerStateChange, onError:onPlayerError }
+    });
+    players[1] = new YT.Player('playerB', {
+      videoId: VIDEO_ID, width:'100%', height:'100%',
+      playerVars: PLAYER_VARS,
+      events:{ onReady:onPlayerReady, onStateChange:onPlayerStateChange, onError:onPlayerError }
+    });
+  }
+
+  function startOrRestart(videoChanged){
+    if(!players[0] || !players[1] || videoChanged){
+      if(players[0] || players[1]){
+        try{ players[0] && players[0].destroy(); }catch(e){}
+        try{ players[1] && players[1].destroy(); }catch(e){}
+        players = [null,null];
+        clearInterval(pollTimer); pollTimer = null;
+      }
+      tryCreatePlayersWhenReady();
+    } else {
+      readyCount = 2;
+      afterBothReady();
+    }
+  }
+
+  // ---------- setup panel ----------
+  function buildCutFromForm(){
+    clearSetupError();
+    const vid = extractVideoId(videoInputEl.value);
+    if(!vid){
+      showSetupError('Não consegui identificar um ID de vídeo do YouTube válido nesse texto.');
+      return false;
+    }
+    const parsed = parseRangesTextarea(rangesInputEl.value);
+    if(parsed.errors.length){
+      showSetupError(parsed.errors.join('\n'));
+      return false;
+    }
+    if(!parsed.segs.length){
+      showSetupError('Define pelo menos um intervalo (uma linha por segmento).');
+      return false;
+    }
+    const videoChanged = vid !== VIDEO_ID;
+    VIDEO_ID = vid;
+    TITLE = titleInputEl.value.trim();
+    LOCKED = lockInputEl.checked;
+    const fin = finalizeSegs(parsed.segs);
+    SEGS = fin.segs; TOTAL = fin.total;
+    writeHash();
+    applyTitle();
+    buildTimelineDOM();
+    renderEDL();
+    noVideoNotice.hidden = true;
+    if(LOCKED) setupEl.hidden = true;
+    startOrRestart(videoChanged);
+    return true;
+  }
+
+  function openSetupWithPlaceholders(){
+    setupEl.hidden = false;
+    setupEl.open = true;
+    noVideoNotice.hidden = false;
+  }
+
+  buildBtn.addEventListener('click', function(){ buildCutFromForm(); });
+
+  copyBtn.addEventListener('click', async function(){
+    const ok = buildCutFromForm();
+    if(!ok) return;
+    const url = location.origin + location.pathname + location.hash;
+    await copyText(url);
+    flashNotice('Link copiado.');
+  });
+
+  // ---------- transport ----------
+  playBtn.addEventListener('click', togglePlay);
+  prevBtn.addEventListener('click', goPrev);
+  nextBtn.addEventListener('click', goNext);
+  muteBtn.addEventListener('click', function(){
+    muted = !muted;
+    try{
+      const p = players[activeIdx];
+      if(p){ if(muted) p.mute(); else p.unMute(); }
+    }catch(e){}
+    muteBtn.textContent = muted ? '\u{1F507}' : '\u{1F50A}';
+  });
+  replayBtn.addEventListener('click', function(){
+    hideEndOverlay();
+    playFrom(0, 0);
+  });
+  clickOverlay.addEventListener('click', startPlayback);
+
+  notesBtn.addEventListener('click', async function(){
+    if(!SEGS.length) return;
+    if(playing){
+      try{ players[activeIdx].pauseVideo(); }catch(e){}
+      playing = false;
+    }
+    const seg = SEGS[curSeg];
+    let sourceT = seg.start + Math.max(0, curEditTime - seg.at);
+    try{ sourceT = players[activeIdx].getCurrentTime(); }catch(e){}
+    const line = formatDisplay(curEditTime) + ' in the cut = ' + formatDisplay(sourceT) + ' in the source (segment ' + (curSeg+1) + ')';
+    await copyText(line);
+    flashNotice('Copiado: ' + line);
+  });
+
+  window.addEventListener('keydown', function(e){
+    const tag = document.activeElement && document.activeElement.tagName;
+    if(tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if(e.key === ' '){ e.preventDefault(); togglePlay(); }
+    else if(e.key === '['){ goPrev(); }
+    else if(e.key === ']'){ goNext(); }
+    else if(e.key === 'ArrowLeft'){ e.preventDefault(); seekRelative(-5); }
+    else if(e.key === 'ArrowRight'){ e.preventDefault(); seekRelative(5); }
+  });
+
+  // ---------- boot ----------
+  function boot(){
+    const h = parseHash();
+    if(h.v && h.c){
+      const vid = extractVideoId(h.v);
+      const parsed = parseRangesHashC(h.c);
+      if(vid && parsed.segs.length && !parsed.errors.length){
+        VIDEO_ID = vid; TITLE = h.t; LOCKED = h.lock;
+        const fin = finalizeSegs(parsed.segs);
+        SEGS = fin.segs; TOTAL = fin.total;
+        videoInputEl.value = VIDEO_ID;
+        titleInputEl.value = TITLE;
+        lockInputEl.checked = LOCKED;
+        rangesInputEl.value = SEGS.map(function(s){ return s.inRaw+'-'+s.outRaw; }).join('\n');
+        applyTitle();
+        buildTimelineDOM();
+        renderEDL();
+        noVideoNotice.hidden = true;
+        if(LOCKED){ setupEl.hidden = true; } else { setupEl.open = false; }
+        tryCreatePlayersWhenReady();
+        return;
+      }
+    }
+    openSetupWithPlaceholders();
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
+{% endraw %}
